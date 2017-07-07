@@ -5,13 +5,17 @@ buildscript {
     repositories {
         mavenLocal()
         maven { url "https://repo.grails.org/grails/core" }
-        mavenCentral()
+        maven { url "https://repo.spring.io/repo" } // for springloaded,etc
+//        mavenCentral()
+//        jcenter()
     }
     dependencies {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
         classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.14.1"
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+
         classpath "org.springframework.boot:spring-boot-gradle-plugin:1.3.0.RELEASE"
+        classpath 'org.springframework:springloaded:1.2.7.RELEASE'
     }
 }
 
@@ -41,23 +45,22 @@ grails{
     plugins {
         compile project(':myplugin')
     }
-    agent {
-        enabled = false
-    }
 }
-
 
 dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.4.4'
+
     compile "org.springframework.boot:spring-boot-starter-logging"
     compile "org.springframework.boot:spring-boot-autoconfigure"
     compile "org.grails:grails-core"
     compile "org.springframework.boot:spring-boot-starter-actuator"
+
     compile "org.springframework.boot:spring-boot-starter-tomcat"
     compile "org.grails:grails-dependencies"
     compile "org.grails:grails-web-boot"
     compile "org.grails.plugins:cache"
     compile "org.grails.plugins:scaffolding"
+
     compile "org.grails.plugins:hibernate4"
     compile "org.hibernate:hibernate-core:4.3.10.Final"
     compile "org.hibernate:hibernate-ehcache:4.3.10.Final"
@@ -69,10 +72,6 @@ dependencies {
     testCompile "org.grails.plugins:geb"
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
-}
-
-bootRun {
-    jvmArgs = ["-agentpath:${gradle.gradleUserHomeDir}/libjrebel64.so"]
 }
 
 task wrapper(type: Wrapper) {
