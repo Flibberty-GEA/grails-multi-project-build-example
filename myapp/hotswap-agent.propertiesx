@@ -1,0 +1,13 @@
+# Watch for changed class files on watchResources path and reload class definition in the running application.
+
+extraClasspath=
+
+watchResources=
+
+webappDir=
+
+disabledPlugins=
+
+autoHotswap=true
+
+LOGGER=info
